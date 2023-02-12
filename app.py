@@ -5,7 +5,7 @@ import uuid
 
 app = Flask(__name__)
 
-flag = app.config["FLAG"]
+flag = "pgctf{}"
 app.secret_key = 'secret'
 
 app.permanent_session_lifetime = timedelta(minutes=30) 
@@ -20,7 +20,7 @@ def get_index():
     con = get_db()
     
     wish_id = uuid.uuid4()
-    wish_body = request.form["wish"]
+    wish_body = request.form["wish"].replace("'", "''")
     con.execute(f"insert into angelwish(id, wish, reply) values('{wish_id}', '{wish_body}', '')")
     con.commit()
     con.close()
