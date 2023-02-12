@@ -34,7 +34,7 @@ def admin_page():
         return render_template('not_admin.html')
 
 
-@app.route('/Q28/wish/<string:wish_id>/', methods=['GET'])
+@app.route('/wish/<string:wish_id>/', methods=['GET'])
 def view_wish(wish_id):
     con = get_db()
     data = list(con.execute(f"select wish, reply from angelwish where id='{wish_id}'"))
@@ -45,7 +45,7 @@ def view_wish(wish_id):
     return render_template('wish.html', wish=wish, reply=reply)
 
 
-@app.route('/Q28/angel/<string:wish_id>/', methods=['GET'])
+@app.route('/angel/<string:wish_id>/', methods=['GET'])
 def view_wish_for_angel(wish_id):
     con = get_db()
     data = list(con.execute(f"select wish, reply from angelwish where id='{wish_id}'"))
@@ -56,7 +56,7 @@ def view_wish_for_angel(wish_id):
     return render_template('angel_wish.html', wish=wish, reply=reply)
 
 
-@app.route('/Q28/angel/<string:wish_id>/reply', methods=['POST'])
+@app.route('/angel/<string:wish_id>/reply', methods=['POST'])
 def reply(wish_id):
     con = get_db()
     reply = request.data.decode()
